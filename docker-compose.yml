@@ -20,6 +20,9 @@ services:
 
   minio:
     container_name: milvus-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
     image: minio/minio:RELEASE.2024-12-18T13-15-44Z
     environment:
       MINIO_ACCESS_KEY: minioadmin
@@ -35,6 +38,9 @@ services:
 
   milvus:
     container_name: milvus-standalone
+    ports:
+      - "9091:9091"
+      - "19530:19530"
     image: milvusdb/milvus:v2.6.20
     command: ["milvus", "run", "standalone"]
     security_opt:
@@ -59,6 +65,8 @@ services:
   
   redis:
     container_name: redis
+    ports:
+      - "6379:6379"
     image: redis:8.8.0
     command: ["redis-server"]
     volumes:
@@ -70,6 +78,8 @@ services:
     build: ./mall-gateway
     image: emall-gateway:0.1
     container_name: emall-gateway
+    ports:
+      - "8080:8080"
     env_file:
       - emall.env
     extra_hosts:
