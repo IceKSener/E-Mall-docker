@@ -76,7 +76,7 @@ services:
   
   mall-gateway:
     build: ./mall-gateway
-    image: emall-gateway:0.1
+    # image: emall-gateway:0.1
     container_name: emall-gateway
     ports:
       - "8080:8080"
@@ -88,7 +88,7 @@ services:
       - redis
   mall-biz-service:
     build: ./mall-biz-service
-    image: emall-business:0.1
+    # image: emall-business:0.1
     container_name: emall-biz-service
     env_file:
       - emall.env
@@ -98,7 +98,7 @@ services:
       - redis
   mall-ai-service:
     build: ./mall-ai-service
-    image: emall-ai:0.1
+    # image: emall-ai:0.1
     container_name: emall-ai-service
     env_file:
       - emall.env
@@ -110,10 +110,12 @@ services:
       - mall-biz-service
   mall-frontend:
     build: ./mall-frontend
-    image: emall-frontend:0.1
+    # image: emall-frontend:0.1
     container_name: emall-frontend
     ports:
       - "80:80"
+    depends_on:
+      - mall-gateway
 
 networks:
   default:
